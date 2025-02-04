@@ -4,7 +4,6 @@ public class DataManager : MonoSingleton<DataManager>
 {
     public int score;
 
-    // 상위 5위 저장
     public string[] bestNames = new string[5];
     public int[] bestScores = new int[5];
 
