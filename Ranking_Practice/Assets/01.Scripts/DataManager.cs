@@ -1,4 +1,3 @@
-using UnityEditor.TerrainTools;
 using UnityEngine;
 
 public class DataManager : MonoSingleton<DataManager>
@@ -15,14 +14,14 @@ public class DataManager : MonoSingleton<DataManager>
         LoadScore();
     }
 
-    public void SetScore(int curScore, string curName)
+    public void SetScore(int currentScore, string currentName)
     {
-        PlayerPrefs.SetString("CurrentPlayerName", curName);
-        PlayerPrefs.SetInt("CurrentPlayerScore", curScore);
+        PlayerPrefs.SetString("CurrentPlayerName", currentName);
+        PlayerPrefs.SetInt("CurrentPlayerScore", currentScore);
 
         for (int i = 0; i < RankLength; i++)
         {
-            if (curScore > bestScores[i])
+            if (currentScore > bestScores[i])
             {
                 for (int j = RankLength - 1; j > i; j--)
                 {
@@ -30,8 +29,8 @@ public class DataManager : MonoSingleton<DataManager>
                     bestNames[j] = bestNames[j - 1];
                 }
 
-                bestScores[i] = curScore;
-                bestNames[i] = curName;
+                bestScores[i] = currentScore;
+                bestNames[i] = currentName;
                 break;
             }
         }
@@ -41,10 +40,10 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void LoadScore()
     {
-        for (int i = 0; i < RankLength; i++)
+        for (int i = 0; i < 5; i++)
         {
-            bestScores[i] = PlayerPrefs.GetInt(i + "BestScore", 000);
-            bestNames[i] = PlayerPrefs.GetString(i + "BestName", "?");
+            bestScores[i] = PlayerPrefs.GetInt($"BestScore{i}", 000);
+            bestNames[i] = PlayerPrefs.GetString($"BestName{i}", "?");
         }
     }
 
@@ -52,8 +51,8 @@ public class DataManager : MonoSingleton<DataManager>
     {
         for (int i = 0; i < RankLength; i++)
         {
-            PlayerPrefs.SetInt(i + "BestScore", bestScores[i]);
-            PlayerPrefs.SetString(i + "BestName", bestNames[i]);
+            PlayerPrefs.SetInt($"BestScore{i}", bestScores[i]);
+            PlayerPrefs.SetString($"BestName{i}", bestNames[i]);
         }
         PlayerPrefs.Save();
     }
