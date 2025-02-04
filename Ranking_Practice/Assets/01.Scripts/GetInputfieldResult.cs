@@ -17,14 +17,9 @@ public class GetInputfieldResult : MonoBehaviour
         if (playerNameInput.text.Length > 0)
         {
             playerName = playerNameInput.text;
-            PlayerPrefs.SetString("PlayerName", playerName);
             DataManager.Instance.SetScore(DataManager.Instance.score, playerName);
 
             SceneManager.LoadScene("Ranking");
-        }
-        else
-        {
-            return;
         }
     }
 }
