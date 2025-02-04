@@ -5,8 +5,10 @@ public class DataManager : MonoSingleton<DataManager>
 {
     public int score;
 
-    public string[] bestNames = new string[5];
-    public int[] bestScores = new int[5];
+    public const int RankLength = 5;
+
+    public string[] bestNames = new string[RankLength];
+    public int[] bestScores = new int[RankLength];
 
     private void Start()
     {
@@ -18,11 +20,11 @@ public class DataManager : MonoSingleton<DataManager>
         PlayerPrefs.SetString("CurrentPlayerName", curName);
         PlayerPrefs.SetInt("CurrentPlayerScore", curScore);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < RankLength; i++)
         {
             if (curScore > bestScores[i])
             {
-                for (int j = 4; j > i; j--)
+                for (int j = RankLength - 1; j > i; j--)
                 {
                     bestScores[j] = bestScores[j - 1];
                     bestNames[j] = bestNames[j - 1];
@@ -39,7 +41,7 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void LoadScore()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < RankLength; i++)
         {
             bestScores[i] = PlayerPrefs.GetInt(i + "BestScore", 000);
             bestNames[i] = PlayerPrefs.GetString(i + "BestName", "?");
@@ -48,7 +50,7 @@ public class DataManager : MonoSingleton<DataManager>
 
     private void SaveScore()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < RankLength; i++)
         {
             PlayerPrefs.SetInt(i + "BestScore", bestScores[i]);
             PlayerPrefs.SetString(i + "BestName", bestNames[i]);
