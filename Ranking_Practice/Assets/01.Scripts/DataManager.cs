@@ -42,7 +42,7 @@ public class DataManager : MonoSingleton<DataManager>
     {
         for (int i = 0; i < 5; i++)
         {
-            bestScores[i] = PlayerPrefs.GetInt($"BestScore{i}", 000);
+            bestScores[i] = PlayerPrefs.GetInt($"BestScore{i}", 0);
             bestNames[i] = PlayerPrefs.GetString($"BestName{i}", "?");
         }
     }
