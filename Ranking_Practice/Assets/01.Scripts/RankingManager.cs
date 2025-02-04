@@ -22,6 +22,7 @@ public class RankingManager : MonoBehaviour
 
     public void GoMain()
     {
+        DataManager.Instance.score = 0;
         SceneManager.LoadScene("Main");
     }
 }
