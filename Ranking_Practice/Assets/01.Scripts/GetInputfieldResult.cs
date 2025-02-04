@@ -1,28 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GetInputfieldResult : MonoBehaviour
 {
     public InputField playerNameInput;
-    private string playerName = null;
+    [SerializeField] private string playerName = null;
 
     private void Start()
     {
         playerName = playerNameInput.GetComponent<InputField>().text;
     }
 
-    private void Update()
-    {
-        if (playerName.Length > 0 && Input.GetKeyDown(KeyCode.Return))
-        {
-
-        }
-    }
-
     public void InputName()
     {
-        playerName = playerNameInput.text;
-        PlayerPrefs.SetString("PlayerName", playerName);
-        
+        if (playerNameInput.text.Length > 0)
+        {
+            playerName = playerNameInput.text;
+            PlayerPrefs.SetString("PlayerName", playerName);
+            DataManager.Instance.SetScore(DataManager.Instance.score, playerName);
+
+            SceneManager.LoadScene("Ranking");
+        }
+        else
+        {
+            return;
+        }
     }
 }
